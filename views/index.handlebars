@@ -1,2 +1,13 @@
- <div id="articles"></div>
+<h1>Cnn Articles</h1>
+ <div id="articles">
+   <ul>
+     {{#each Articles}}
+        <li>
+          {{this.articles}}
+          <button class="save-article" data-id="{{this.id}}">Save Article</button>
+        </li>
+      {{/each}}
+   </ul>
+ </div>
+
  <div id="comments"></div>

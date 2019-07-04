@@ -26,24 +26,18 @@ app.set('view engine', 'handlebars');
 
 
 app.get("/", function (req, res) {
-  res.render("index");
-  axios.get("https://www.cnn.com/").then(function (response) {
-
+  axios.get("https://www.cnn.com").then(function (response) {
     var $ = cheerio.load(response.data);
-    console.log(response.data);
-    $("article h3").each(function (i, element) {
+    $(".cd__headline-text").each(function (i, element) {
       var result = {};
 
       result.title = $(this)
         .children("a")
         .text();
-      result.span.cd = $(this)
-        .children("a")
-        .text();
       result.link = $(this)
         .children("a")
         .attr("href");
-
+      console.log(result);
       db.Article.create(result)
         .then(function (dbArticle) {
           console.log(dbArticle);
@@ -52,7 +46,7 @@ app.get("/", function (req, res) {
           console.log(err);
         });
     });
-    res.send("Complete");
+    res.render("index");
   });
 });
 
@@ -89,7 +83,7 @@ app.get("/articles/:id", function (req, res) {
 // Route for saving/updating an Article's associated Note
 app.post("/articles/:id", function (req, res) {
   // Create a new note and pass the req.body to the entry
-  db.Note.create(req.body)
+  db.Comment.create(req.body)
     .then(function (dbComment) {
       // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
       // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
