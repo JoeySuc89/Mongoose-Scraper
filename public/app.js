@@ -29,7 +29,7 @@ $(document).on("click", "p", function() {
    });
 });
 
-$(document).on("click", "#savenote", function() {
+$(document).on("click", "#savecomment", function() {
 
 var thisId = $(this).attr("data-id");
 

@@ -25,14 +25,14 @@ app.set('view engine', 'handlebars');
 //localhost:3000/
 
 
-app.get("/", function (req, res) {
-  axios.get("https://www.cnn.com").then(function (response) {
+app.get("/scrape", function (req, res) {
+  axios.get("https://www.burlingtoncountytimes.com/").then(function (response) {
     var $ = cheerio.load(response.data);
-    $(".cd__headline-text").each(function (i, element) {
+    $("article").each(function (i, element) {
       var result = {};
 
       result.title = $(this)
-        .children("a")
+        .children("h1")
         .text();
       result.link = $(this)
         .children("a")
