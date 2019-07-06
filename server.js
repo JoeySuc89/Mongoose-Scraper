@@ -1,5 +1,4 @@
 var express = require('express');
-var exphbs = require('express-handlebars');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var axios = require('axios');
@@ -20,10 +19,7 @@ var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mongoHeadlines
 
 mongoose.connect(MONGODB_URI);
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
 //localhost:3000/
-
 
 app.get("/scrape", function (req, res) {
   axios.get("https://www.burlingtoncountytimes.com/").then(function (response) {
@@ -31,13 +27,13 @@ app.get("/scrape", function (req, res) {
     $("article").each(function (i, element) {
       var result = {};
 
-      result.title = $(this)
+      result.title = $(element)
         .children("h1")
         .text();
-      result.link = $(this)
+      result.link = $(element)
         .children("a")
         .attr("href");
-      console.log(result);
+
       db.Article.create(result)
         .then(function (dbArticle) {
           console.log(dbArticle);
