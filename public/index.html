@@ -17,7 +17,7 @@
         width: 60%;
         height: 700px;
       }
-      #notes {
+      #coments {
         float: right;
         width: 30%;
       }
@@ -34,14 +34,19 @@
         height: 200px;
         font-size: 18px;
       }
+      #scrapebtn {
+        background-color: blue;
+        color: red;
+      }
     </style>
   </head>
   <body>
     <div id="wrapper">
-      <h1>Note Scraper</h1>
-      <h2><i>If you can do this...the homework should be no problem.</i></h2>
+      <h3> BCT Scraper</h3>
       <div id="articles"></div>
-      <div id="notes"></div>
+      <button id="scrapebtn" class="btn-btn danger">Scrape Articles!</button>
+      <div id="comment_scr"><ul class="c_ul"></ul></div>
+      <div id="comments"></div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app.js"></script>
